@@ -1,0 +1,35 @@
+.chatapp{
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    .vs-sidebar{
+        max-width: $full-sidebar;
+        background: transparent;
+        box-shadow: none;
+        border-right: 1px solid $border-color;
+        .vs-sidebar--items{
+            overflow: hidden;
+        }
+    }
+    .chat-userlist{
+        height:100vh;
+        
+        li{
+            display: flex;
+            padding: 10px;
+            align-items: center;
+            .user-about{
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 100%;
+            }
+            .con-vs-avatar{
+                flex-shrink: 0;
+                margin-right: 8px;
+            }
+        }
+    }
+}
+
+
