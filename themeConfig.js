@@ -6,7 +6,7 @@ Vue.use(Vuesax, {
       primary:'#F9D43C',
       success:'#36bea6',
       danger:'#f62d51',
-      warning:'#ffbc34',
+      warning:'#F9D43C',
       dark:'#212529'
     }
   }

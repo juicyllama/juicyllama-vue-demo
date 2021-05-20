@@ -1,21 +1,8 @@
 <template>
  <vs-row vs-justify="center">
-    <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-xs="12" code-toggler>
-      <vs-card actionable class="cardx">
-        <div slot="header">
-          <h4>
-            Hello world !
-          </h4>
-        </div>
-        
-        <div >
-          
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-          
-        </div>
-        
-      </vs-card>
-    </vs-col>
+
+    <WhosOnlineComponent></WhosOnlineComponent>
+
     <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-xs="12">
       <vs-card actionable class="cardx">
         <div slot="header">
@@ -35,20 +22,19 @@
 
 <script>
 import {auth, superhero} from "@/functions/auth";
+import {online} from "@/functions/activity";
+import WhosOnlineComponent from "@/views/Components/WhosOnline";
 
 export default {
 	name : 'Home',
+    components: {WhosOnlineComponent},
     data:() => ({
         superhero: {}
     }),
     created() {
         auth(this.$router)
-        this.$set(this, 'superhero', superhero(this.$router))
+        this.superhero = superhero(this.$router)
+        online(this.superhero.name, {avatar: this.superhero.avatar})
     }
 }
 </script>
-<style>
-.ps {
-  height: 100px;
-}
-</style>

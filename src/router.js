@@ -28,7 +28,7 @@ const router = new Router({
                 path: '/error',
                 name: '404',
                 index: 2,
-                component: () => import('./views/authentication/Error404.vue')
+                component: () => import('./views/404.vue')
             }]
         },
         {
@@ -54,6 +54,41 @@ const router = new Router({
                     i18n: "Superhero",
                     index: 1,
                     component: () => import('./views/Superhero.vue')
+                },
+                {
+                    path: '/online',
+                    name: 'Who\'s Online',
+                    i18n: 'Who\'s Online',
+                    index: 1,
+                    component: () => import('./views/Activity/WhosOnline.vue')
+                },
+                {
+                    path: '/streak',
+                    name: 'Daily Streak',
+                    i18n: 'Daily Streak',
+                    index: 1,
+                    component: () => import('./views/Activity/Streak.vue')
+                },
+                {
+                    path: '/profile/:user',
+                    name: 'Profile',
+                    i18n: 'Profile',
+                    index: 1,
+                    component: () => import('./views/Profile.vue')
+                },
+                {
+                    path: '/badges',
+                    name: 'Badges',
+                    i18n: 'Badges',
+                    index: 1,
+                    component: () => import('./views/Badges/Badges.vue')
+                },
+                {
+                    path: '/badge/:badge_id',
+                    name: 'Badge',
+                    i18n: 'Badge',
+                    index: 1,
+                    component: () => import('./views/Badges/Badge.vue')
                 },
             ]
         },

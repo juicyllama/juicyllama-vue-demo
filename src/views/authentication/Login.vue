@@ -20,6 +20,8 @@
 <script>
 import fbLogin from "@/components/facebook/login/fbLogin"
 import storage from "@/store/storage.js"
+import moment from 'moment-timezone'
+
 export default {
     name: 'Login',
     components: {fbLogin},
@@ -28,15 +30,31 @@ export default {
     methods: {
         onLogin: async function(value){
             storage.set('fb', value)
+            this.setTimezone()
             this.$router.push('/home');
             //todo push email to service to track who is using for marketing purposes.
-        }
+        },
+        setTimezone: function(){
+
+            let timezone = storage.get('timezone')
+
+            if(!timezone){
+                let timezone = moment.tz.guess()
+                storage.set('timezone', timezone)
+                moment.tz.setDefault(timezone);
+            }else{
+                moment.tz.setDefault(timezone);
+            }
+
+        },
+
     },
     computed: {},
     created: async function() {
         let fb = storage.get('fb')
 
         if(fb.userID){
+            this.setTimezone()
             this.$router.push('/home');
         }
     },

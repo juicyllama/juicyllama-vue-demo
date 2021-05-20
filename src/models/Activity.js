@@ -9,11 +9,11 @@ export default {
         this.user_identifier = data.user_identifier
         this.app_json = data.app_json
         this.streak = Number(data.streak)
-        this.updated_at = moment(data.updated_at).format(process.env.DATE_FORMAT)
+        this.updated_at = moment(data.updated_at).format(process.env.VUE_APP_DATE_FORMAT)
     },
 
     getActivity: async function(user_identifier){
-        return await Service.getActivity(user_identifier)
+        return new this.Activity(await Service.getActivity(user_identifier))
     },
 
     getActivities: async function(limit, offset) {

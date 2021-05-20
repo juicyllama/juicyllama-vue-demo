@@ -4,10 +4,12 @@
     <vs-sidebar default-index="1" :parent="parent" :hiddenBackground="doNotClose" color="primary" class="left-sidebar" spacer v-model="isSidebarActive" :click-not-close="doNotClose" :reduce="isSidebarReduced">
       
       <div class="header-sidebar text-center" slot="header" v-if="superhero_name">
-        <vs-avatar size="70px" :src="require(`@/assets/images/superheros/${superhero_avatar}-superhero.svg`)"/>
-        <h4>{{ superhero_name }}<br/>
-            <router-link to="/superhero"><small>Switch Superhero</small></router-link>
-        </h4>
+          <router-link :to="`/profile/${superhero_name}`">
+                <vs-avatar size="70px" :src="require(`@/assets/images/superheros/${superhero_avatar}-superhero.svg`)"/>
+                <h4 style="color: var(--dark)">{{ superhero_name }}<br/>
+                    <router-link to="/superhero"><small>Switch Superhero</small></router-link>
+                </h4>
+          </router-link>
       </div>
       
       <div v-bar class="vs-scrollable">
@@ -39,7 +41,7 @@
       </div>
       
       <div class="footer-sidebar" slot="footer">
-        <vs-button icon="reply" color="danger" type="flat" to="/login"><span class="hide-in-minisidebar">log out</span></vs-button>
+        <vs-button icon="reply" color="danger" type="flat" @click="logout"><span class="hide-in-minisidebar">log out</span></vs-button>
       </div>
       
     </vs-sidebar>
@@ -118,6 +120,10 @@ export default {
   },
   watch: {},
   methods: {
+      logout(){
+          localStorage.clear()
+          this.$router.push('/login')
+      },
     handleWindowResize(event) {
       this.windowWidth = event.currentTarget.innerWidth;
       this.setSidebarWidth();

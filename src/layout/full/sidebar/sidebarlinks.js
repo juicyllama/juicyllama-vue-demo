@@ -28,4 +28,13 @@ export default [
             },
         ]
     },
+    {
+        url:  '/badges',
+        name: "Badges",
+        i18n: "Badges",
+        icon: "mdi mdi-trophy",
+        index: 3.0,
+
+    },
+
 ]

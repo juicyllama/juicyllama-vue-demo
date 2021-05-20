@@ -40,6 +40,7 @@
 import {auth} from "@/functions/auth";
 import superheros from "@/assets/superheros.json"
 import storage from "@/store/storage";
+import {online} from "@/functions/activity";
 
 export default {
 	name : 'Home',
@@ -54,13 +55,9 @@ export default {
         setSuperhero(index) {
             storage.set('superhero_name', superheros[index].name)
             storage.set('superhero_avatar', superheros[index].avatar)
+            online(superheros[index].name, {avatar: superheros[index].avatar})
             this.$router.go()
         }
     }
 }
 </script>
-<style>
-.ps {
-  height: 100px;
-}
-</style>
