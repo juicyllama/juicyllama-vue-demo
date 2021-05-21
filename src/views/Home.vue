@@ -23,7 +23,7 @@
 <script>
 import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
-import WhosOnlineComponent from "@/views/Components/WhosOnline";
+import WhosOnlineComponent from "@/views/_components/WhosOnline";
 
 export default {
 	name : 'Home',
@@ -34,7 +34,7 @@ export default {
     created() {
         auth(this.$router)
         this.superhero = superhero(this.$router)
-        online(this.superhero.name, {avatar: this.superhero.avatar})
+        online(this.superhero.name)
     }
 }
 </script>

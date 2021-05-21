@@ -62,6 +62,75 @@
 
      </vs-col>
 
+     <!---------------------------
+     Following
+     ----------------------------->
+        <vs-col
+         type="flex"
+         vs-lg="3"
+         vs-xs="12"
+         vs-justify="center"
+         vs-align="center"
+         v-if="following"
+     >
+         <vs-card class="cardx">
+             <vs-row>
+                 <h5>Following</h5>
+             </vs-row>
+
+             <vs-row class="mt-2">
+
+                 <router-link :to="`/profile/${follow.connection_user_identifier}`"
+                              v-for="(follow, index) in following"
+                              :key="index">
+                     <img
+                         :src="require(`@/assets/images/superheros/${getSuperhero(follow.connection_user_identifier).avatar}-superhero.svg`)"
+                         width="32"
+                         height="32"
+                         class="mr-1 mb-1"
+                     >
+                 </router-link>
+
+             </vs-row>
+
+         </vs-card>
+
+     </vs-col>
+
+     <!---------------------------
+     Followers
+     ----------------------------->
+        <vs-col
+         type="flex"
+         vs-lg="3"
+         vs-xs="12"
+         vs-justify="center"
+         vs-align="center"
+         v-if="followers"
+     >
+         <vs-card class="cardx">
+             <vs-row>
+                 <h5>Followers</h5>
+             </vs-row>
+
+             <vs-row class="mt-2">
+
+                 <router-link :to="`/profile/${follow.user_identifier}`"
+                              v-for="(follow, index) in followers"
+                              :key="index">
+                     <img
+                         :src="require(`@/assets/images/superheros/${getSuperhero(follow.user_identifier).avatar}-superhero.svg`)"
+                         width="32"
+                         height="32"
+                         class="mr-1 mb-1"
+                     >
+                 </router-link>
+
+             </vs-row>
+
+         </vs-card>
+
+     </vs-col>
 
   </vs-row>
 </template>
@@ -74,6 +143,8 @@ import {readActivity} from "@/controllers/activity";
 import {xAgo} from "@/functions/utils/date";
 import {readAwards} from "@/controllers/award";
 import {showBadgeImage} from "@/components/badge_image";
+import {readConnections} from "@/controllers/connections";
+import {getSuperHero} from "@/functions/superhero";
 
 export default {
 	name : 'Profile',
@@ -84,12 +155,14 @@ export default {
         user_avatar: false,
         user_name: false,
         activity: false,
-        awards: false
+        awards: false,
+        following: false,
+        followers: false
     }),
     created() {
         auth(this.$router)
         this.superhero = superhero(this.$router)
-        online(this.superhero.name, {avatar: this.superhero.avatar})
+        online(this.superhero.name)
         this.user = this.$route.params.user
         this.runner()
     },
@@ -105,6 +178,8 @@ export default {
            if(this.user_name){
                await this.getOnline()
                await this.getAwards()
+               await this.getFollowing()
+               await this.getFollowers()
            }
         },
         getOnline: async function() {
@@ -113,11 +188,20 @@ export default {
         getAwards: async function() {
             this.awards = await readAwards(this.user_name, false)
         },
+        getFollowing: async function() {
+            this.following = await readConnections(this.user_name, 'outbound')
+        },
+        getFollowers: async function() {
+            this.followers = await readConnections(this.user_name, 'inbound')
+        },
         showBadge: function(badge_id, hidden = false) {
             return showBadgeImage(Number(badge_id), hidden)
         },
         xAgo(date){
             return xAgo(date)
+        },
+        getSuperhero(user_identifier){
+            return getSuperHero(user_identifier)
         },
     },
     watch: {

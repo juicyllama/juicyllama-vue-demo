@@ -14,7 +14,7 @@
           <router-link :to="`/profile/${superhero.user_identifier}`">
               <vs-row vs-justify="center">
                     <img
-                        :src="require(`@/assets/images/superheros/${superhero.app_json.avatar}-superhero.svg`)"
+                        :src="require(`@/assets/images/superheros/${getSuperhero(superhero.user_identifier).avatar}-superhero.svg`)"
                         width="70"
                         height="70"
                         v-if="superhero.app_json.avatar"
@@ -40,6 +40,7 @@ import {online} from "@/functions/activity";
 import {readActivities} from "@/controllers/activity";
 import {xAgo} from "@/functions/utils/date";
 import {sortArray} from "@/functions/utils/arrays";
+import {getSuperHero} from "@/functions/superhero";
 
 export default {
 	name : 'WhosOnline',
@@ -50,7 +51,7 @@ export default {
     created() {
         auth(this.$router)
         this.superhero = superhero(this.$router)
-        online(this.superhero.name, {avatar: this.superhero.avatar})
+        online(this.superhero.name)
         this.getOnline()
         this.subscribeActivity()
     },
@@ -98,6 +99,9 @@ export default {
             superheros = await sortArray('updated_at', superheros, 'moment', true)
             superheros.slice(0, 24)
             this.superheros = superheros
+        },
+        getSuperhero(user_identifier){
+            return getSuperHero(user_identifier)
         },
     }
 }

@@ -43,7 +43,7 @@ import storage from "@/store/storage";
 import {online} from "@/functions/activity";
 
 export default {
-	name : 'Home',
+	name : 'Superhero',
     data:() => ({
         superheros: superheros,
         superhero_selected: Number(storage.get('superhero_avatar'))
@@ -56,7 +56,8 @@ export default {
             storage.set('superhero_name', superheros[index].name)
             storage.set('superhero_avatar', superheros[index].avatar)
             online(superheros[index].name, {avatar: superheros[index].avatar})
-            this.$router.go()
+            this.$router.replace('/home')
+            this.$router.go(0)
         }
     }
 }

@@ -53,7 +53,7 @@ export default {
     created() {
         auth(this.$router)
         this.superhero = superhero(this.$router)
-        online(this.superhero.name, {avatar: this.superhero.avatar})
+        online(this.superhero.name)
         this.runner()
     },
     methods: {

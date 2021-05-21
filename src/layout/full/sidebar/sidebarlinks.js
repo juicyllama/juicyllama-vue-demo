@@ -36,5 +36,27 @@ export default [
         index: 3.0,
 
     },
+    {
+        name: "Connections",
+        i18n: "Connections",
+        icon: "mdi mdi-account-multiple",
+        index: 4.0,
+        child: [
+            {
+                url:  '/following',
+                name: "Following",
+                i18n: "Following",
+                icon: "mdi mdi-account-multiple-plus",
+                index: 2.1
+            },
+            {
+                url:  '/followers',
+                name: "Followers",
+                i18n: "Followers",
+                icon: "mdi mdi-account-multiple-outline",
+                index: 2.2
+            },
+        ]
+    },
 
 ]

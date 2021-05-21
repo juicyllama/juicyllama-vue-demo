@@ -23,7 +23,7 @@ const router = new Router({
                 path: '/login',
                 name: 'Login',
                 index: 1,
-                component: () => import('./views/authentication/Login.vue')
+                component: () => import('./views/_authentication/Login.vue')
             }, {
                 path: '/error',
                 name: '404',
@@ -89,6 +89,20 @@ const router = new Router({
                     i18n: 'Badge',
                     index: 1,
                     component: () => import('./views/Badges/Badge.vue')
+                },
+                {
+                    path: '/following',
+                    name: 'Following',
+                    i18n: 'Following',
+                    index: 1,
+                    component: () => import('./views/Connections/Following.vue')
+                },
+                {
+                    path: '/followers',
+                    name: 'Followers',
+                    i18n: 'Followers',
+                    index: 1,
+                    component: () => import('./views/Connections/Followers.vue')
                 },
             ]
         },

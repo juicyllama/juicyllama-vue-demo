@@ -5,7 +5,9 @@
             <h4>
                 Who's Online
             </h4>
-            <p class="text-muted mt-1">There are <span style="text-decoration: underline; text-decoration-color: var(--primary); text-decoration-thickness: 2px; font-weight: bold; color: black ">{{count}} <span v-if="count === 1">Superhero</span><span v-else>Superhero's</span></span> online now.</p>
+            <p class="text-muted mt-1">There are <span style="text-decoration: underline; text-decoration-color: var(--primary); text-decoration-thickness: 2px; font-weight: bold; color: black ">{{count}}
+                <span v-if="count === 1">Superhero</span>
+                <span v-else>Superheros</span></span> online now.</p>
 
 
             <div>
@@ -64,7 +66,7 @@ export default {
     created: function () {
         auth(this.$router)
         this.superhero = superhero(this.$router)
-        online(this.superhero.name, {avatar: this.superhero.avatar})
+        online(this.superhero.name)
         this.countOnline()
         this.getOnline()
         this.subscribeActivity()

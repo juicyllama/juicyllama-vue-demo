@@ -94,7 +94,7 @@ export default {
     created() {
         auth(this.$router)
         this.superhero = superhero(this.$router)
-        online(this.superhero.name, {avatar: this.superhero.avatar})
+        online(this.superhero.name)
         this.badge_id = this.$route.params.badge_id
         this.runner()
     },
