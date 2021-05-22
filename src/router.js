@@ -104,6 +104,20 @@ const router = new Router({
                     index: 1,
                     component: () => import('./views/Connections/Followers.vue')
                 },
+                {
+                    path: '/messages',
+                    name: 'Messages',
+                    i18n: 'Messages',
+                    index: 1,
+                    component: () => import('./views/Messages/Chat.vue')
+                },
+                {
+                    path: '/messages/:chat_id',
+                    name: 'Message',
+                    i18n: 'Message',
+                    index: 1,
+                    component: () => import('./views/Messages/Chat.vue')
+                },
             ]
         },
         // Redirect to 404 page, if no match found

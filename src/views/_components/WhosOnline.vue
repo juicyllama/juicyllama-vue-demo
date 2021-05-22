@@ -18,9 +18,9 @@
                         :activity="superhero"
                         :key="superhero.activity_id"
                     >
-                        <router-link to="/online" v-if="superhero.app_json.avatar">
+                        <router-link to="/online">
                         <img
-                            :src="require(`@/assets/images/superheros/${superhero.app_json.avatar}-superhero.svg`)"
+                            :src="require(`@/assets/images/superheros/${getSuperhero(superhero.user_identifier).avatar}-superhero.svg`)"
                             width="32"
                             height="32"
                         >
@@ -52,6 +52,7 @@ import {readActivities, countActivities} from "@/controllers/activity";
 import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
 import {sortArray} from "@/functions/utils/arrays";
+import {getSuperHero} from "@/functions/superhero";
 import Pusher from "pusher-js";
 
 export default {
@@ -86,6 +87,9 @@ export default {
         getOnline: async function() {
             let superheros = await readActivities(9999, 0, false)
             this.superheros = await sortArray('updated_at', superheros, 'moment', true)
+        },
+        getSuperhero(user_identifier){
+            return getSuperHero(user_identifier)
         },
         subscribeActivity: async function () {
             let pusher = new Pusher(process.env.VUE_APP_JUICYLLAMA_PUSHER_KEY, {cluster: 'eu'})

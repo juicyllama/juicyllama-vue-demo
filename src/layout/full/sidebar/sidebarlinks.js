@@ -47,16 +47,24 @@ export default [
                 name: "Following",
                 i18n: "Following",
                 icon: "mdi mdi-account-multiple-plus",
-                index: 2.1
+                index: 4.1
             },
             {
                 url:  '/followers',
                 name: "Followers",
                 i18n: "Followers",
                 icon: "mdi mdi-account-multiple-outline",
-                index: 2.2
+                index: 4.2
             },
         ]
+    },
+    {
+        url:  '/messages',
+        name: "Messages",
+        i18n: "Messages",
+        icon: "mdi mdi-forum",
+        index: 5.0,
+
     },
 
 ]

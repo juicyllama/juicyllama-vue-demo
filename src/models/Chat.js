@@ -6,9 +6,12 @@ export default {
     Chat: function (data) {
         this.chat_id = Number(data.chat_id)
         this.app_id = Number(data.app_id)
-        this.users = [data.user_identifier_1, data.user_identifier_2]
-        this.status = [data.status_user_identifier_1, data.status_user_identifier_2]
+        this.users = data.users
+        this.status = data.status
+        this.latest_chatter = data.latest_chatter
+        this.latest_message = data.latest_message
         this.app_json = data.app_json
+        this.messages = data.messages
         this.created_at = moment(data.created_at).format(process.env.VUE_APP_DATE_FORMAT)
         this.updated_at = moment(data.updated_at).format(process.env.VUE_APP_DATE_FORMAT)
     },

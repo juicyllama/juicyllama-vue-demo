@@ -143,11 +143,12 @@ export async function updateMessage(chat_id, message_id, user_identifier, messag
     return result
 }
 
-export async function markReadChat(chat_id, user_identifier) {
+export async function markAsRead(chat_id, user_identifier) {
     return await Model.markReadChat(chat_id, user_identifier)
 }
 
 export async function deleteChat(chat_id, user_identifier) {
+
     let connection = await Model.removeChat(chat_id, user_identifier)
 
     if(!connection) {

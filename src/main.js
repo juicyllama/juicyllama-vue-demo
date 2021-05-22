@@ -14,12 +14,16 @@ import '../themeConfig.js'
 // import PerfectScrollbar from "vue2-perfect-scrollbar";
 // import "vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css";
 // Vue.use(PerfectScrollbar);
-
+import VueQuillEditor from 'vue-quill-editor'
 import Vuebar from 'vuebar';
 Vue.use(Vuebar);
 // Theme Configurations
 import 'prismjs'
 import 'prismjs/themes/prism.css'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 import VsPrism from './components/prism/VsPrism.vue';
 Vue.component(VsPrism.name, VsPrism);
 import VsSidebarGroup from './components/vs-sidebar-group/Sidebar-Group.vue';
@@ -31,6 +35,7 @@ import router from './router'
 Vue.config.productionTip = false
 
 Vue.use(Vuesax)
+Vue.use(VueQuillEditor)
 
 new Vue({
   store,
