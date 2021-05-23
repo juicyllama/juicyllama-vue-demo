@@ -28,9 +28,9 @@
       <div class="hiddenMobile cursor-pointer" @click="reduceSidebar" v-show="!showToggle">
         <vs-icon icon="menu"></vs-icon>
       </div>
-      <div class="hiddenMobile cursor-pointer" @click="fullSidebar" v-show="showToggle">
-        <vs-icon icon="menu"></vs-icon>
-      </div>
+        <div class="hiddenMobile cursor-pointer" @click="fullSidebar" v-show="showToggle">
+            <vs-icon icon="menu"></vs-icon>
+        </div>
 
       <vs-spacer></vs-spacer>
 
@@ -52,12 +52,6 @@ export default {
     logo: {
       type: String
     },
-    // Obj for Userdropdown
-    user: Object,
-    // Obj for Mail Dropdown
-    mail: Object,
-    // Obj for Chat Dropdown
-    chat: Object
   },
   data: () => ({
     indexActive: 0,

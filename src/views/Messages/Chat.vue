@@ -53,36 +53,46 @@
                         <div v-bar class="vs-scrollable">
                             <div>
                                 <div class="chat-room mt-2">
-                                    <div class="d-flex align-items-center mb-3" v-for="message in conversation.messages" :key="message.message_id" :class="{fromMe: message.user_identifier === superhero.name, 'messageItem': true}">
+                                    <div class="align-items-center mb-3 w-100" v-for="message in conversation.messages" :key="message.message_id" style="display: flex;">
+
+                                        <div v-if="message.user_identifier !== superhero.name" class="align-items-center d-flex fromMe messageItem">
+
                                             <span class="thumb">
+                                                 <router-link :to="`/profile/${message.user_identifier}`">
+                                                  <img
+                                                      :src="require(`@/assets/images/superheros/${getSuperhero(message.user_identifier).avatar}-superhero.svg`)"
+                                                      width="37"
+                                                      height="37"
+                                                  >
+                                                 </router-link>
+                                            </span>
 
-                                                <span  v-if="message.user_identifier === superhero.name">
-                                                     <img
-                                                         :src="require(`@/assets/images/superheros/${getSuperhero(message.user_identifier).avatar}-superhero.svg`)"
-                                                         width="37"
-                                                         height="37"
-                                                     >
-                                                </span>
+                                            <div v-if="message_id === message.message_id" class="messageBody w-100">
+                                                <wiziwig placeholder="Type and hit enter" :content="message.message" :type="`MESSAGE_${message.message_id}`" submit="keyup" @submitted="editedMessage" theme="boxed"></wiziwig>
+                                            </div>
+                                            <div v-else class="messageBody">
+                                                <span v-if="superhero.name && message.user_identifier === superhero.name" v-html="message.message" @click="editMessage(message.message_id)"></span>
+                                                <span v-else v-html="message.message"></span>
+                                            </div>
+                                        </div>
 
-                                                <span v-else>
-                                                    <router-link :to="`/profile/${message.user_identifier}`">
+                                        <div v-else class="messageItem w-100 mb-3 align-items-center">
+
+                                            <span class="thumb" style="float: right">
                                                          <img
                                                              :src="require(`@/assets/images/superheros/${getSuperhero(message.user_identifier).avatar}-superhero.svg`)"
                                                              width="37"
                                                              height="37"
                                                          >
-                                                    </router-link>
-                                                 </span>
+                                            </span>
 
-                                                </span>
+                                            <div class="messageBody" style="float: right">
+                                                <span v-if="superhero.name && message.user_identifier === superhero.name" v-html="message.message" @click="editMessage(message.message_id)"></span>
+                                                <span v-else v-html="message.message"></span>
+                                            </div>
 
-                                        <div v-if="message_id === message.message_id" class="messageBody w-100">
-                                            <wiziwig placeholder="Type and hit enter" :content="message.message" :type="`MESSAGE_${message.message_id}`" submit="keyup" @submitted="editedMessage" theme="boxed"></wiziwig>
                                         </div>
-                                        <div v-else class="messageBody">
-                                            <span v-if="superhero.name && message.user_identifier === superhero.name" v-html="message.message" @click="editMessage(message.message_id)"></span>
-                                            <span v-else v-html="message.message"></span>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -379,6 +389,24 @@ background-color: white;
         margin-left: 60px;
     }
 
+}
+
+.fromMe .messageBody {
+    margin-left: 20px;
+    background-color: var(--light);
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-radius: 0px 30px 30px 30px;
+}
+
+.messageBody {
+    margin-right: 20px;
+    background-color: var(--primary);
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-radius: 30px 0px 30px 30px;
 }
 
 </style>
