@@ -112,7 +112,7 @@ const router = new Router({
                     component: () => import('./views/Messages/Chat.vue')
                 },
                 {
-                    path: '/messages/:chat_id',
+                    path: '/message/:chat_id',
                     name: 'Message',
                     i18n: 'Message',
                     index: 1,

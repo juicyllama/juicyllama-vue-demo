@@ -34,9 +34,16 @@ export async function readChat(chat_id, user_identifier = false, limit = false, 
 
 export async function readChats(user_identifier  = false, users_include = false, users_exclude = false, status = false, limit = false, offset = false, after = false, use_cache = true) {
 
+    let key = `${CACHE_KEY}S`
+
+    if(user_identifier){ key += `_${user_identifier}` }
+    if(users_include){ key += `_${users_include}` }
+    if(users_exclude){ key += `_${users_exclude}` }
+    if(status){ key += `_${status}` }
+
     let cache_settings = {
         expiry: moment().add(5, 'minutes'),
-        key: `${CACHE_KEY}S`,
+        key: key,
     }
 
     if (use_cache) {
@@ -61,9 +68,16 @@ export async function readChats(user_identifier  = false, users_include = false,
 
 export async function countChats(user_identifier  = false, users_include = false, users_exclude = false, status = false, after = false, use_cache = true) {
 
+    let key = `${CACHE_KEY}S`
+
+    if(user_identifier){ key += `_${user_identifier}` }
+    if(users_include){ key += `_${users_include}` }
+    if(users_exclude){ key += `_${users_exclude}` }
+    if(status){ key += `_${status}` }
+
     let cache_settings = {
         expiry: moment().add(5, 'minutes'),
-        key: `${CACHE_KEY}S_COUNT`,
+        key: `${key}_COUNT`,
     }
 
     if (use_cache) {

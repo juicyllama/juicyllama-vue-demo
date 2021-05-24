@@ -22,6 +22,10 @@
                  <span>{{ user_name }}</span>
              </vs-row>
 
+             <vs-row vs-justify="center" class="mt-2" v-if="points.points">
+                 <span><span style="text-decoration: underline; text-decoration-color: var(--primary); text-decoration-thickness: 2px; font-weight: bold; color: black ">{{ points.points }}</span> Point<span v-if="points.points > 1">s</span></span>
+             </vs-row>
+
              <vs-row vs-justify="center" class="mt-1" v-if="awards.length > 0">
                  <router-link
                      v-for="(award, index) in awards"
@@ -136,20 +140,21 @@
 </template>
 
 <script>
+import superheros from "@/assets/superheros.json"
 import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
-import superheros from "@/assets/superheros.json"
-import {readActivity} from "@/controllers/activity";
-import {xAgo} from "@/functions/utils/date";
-import {readAwards} from "@/controllers/award";
-import {showBadgeImage} from "@/components/badge_image";
-import {readConnections} from "@/controllers/connections";
 import {getSuperHero} from "@/functions/superhero";
+import {xAgo} from "@/functions/utils/date";
+import {showBadgeImage} from "@/components/badge_image";
+import {readActivity} from "@/controllers/activity";
+import {readAwards} from "@/controllers/award";
+import {readConnections} from "@/controllers/connections";
+import {readPoints} from "@/controllers/points";
 
 export default {
-	name : 'Profile',
+    name: 'Profile',
     components: {},
-    data:() => ({
+    data: () => ({
         superhero: {},
         user: false,
         user_avatar: false,
@@ -157,7 +162,8 @@ export default {
         activity: false,
         awards: false,
         following: false,
-        followers: false
+        followers: false,
+        points: false
     }),
     created() {
         auth(this.$router)
@@ -168,39 +174,43 @@ export default {
     },
     methods: {
         runner: async function () {
-           for(const s in superheros){
-               if(superheros[s].name === this.user){
-                   this.user_avatar = superheros[s].avatar
-                   this.user_name = superheros[s].name
-               }
+            for (const s in superheros) {
+                if (superheros[s].name === this.user) {
+                    this.user_avatar = superheros[s].avatar
+                    this.user_name = superheros[s].name
+                }
             }
 
-           if(this.user_name){
-               await this.getOnline()
-               await this.getAwards()
-               await this.getFollowing()
-               await this.getFollowers()
-           }
+            if (this.user_name) {
+                await this.getOnline()
+                await this.getAwards()
+                await this.getFollowing()
+                await this.getFollowers()
+                await this.getPoints()
+            }
         },
-        getOnline: async function() {
+        getOnline: async function () {
             this.activity = await readActivity(this.user_name)
         },
-        getAwards: async function() {
+        getAwards: async function () {
             this.awards = await readAwards(this.user_name, false)
         },
-        getFollowing: async function() {
+        getFollowing: async function () {
             this.following = await readConnections(this.user_name, 'outbound')
         },
-        getFollowers: async function() {
+        getFollowers: async function () {
             this.followers = await readConnections(this.user_name, 'inbound')
         },
-        showBadge: function(badge_id, hidden = false) {
+        getPoints: async function () {
+            this.points = await readPoints(this.user_name)
+        },
+        showBadge: function (badge_id, hidden = false) {
             return showBadgeImage(Number(badge_id), hidden)
         },
-        xAgo(date){
+        xAgo(date) {
             return xAgo(date)
         },
-        getSuperhero(user_identifier){
+        getSuperhero(user_identifier) {
             return getSuperHero(user_identifier)
         },
     },

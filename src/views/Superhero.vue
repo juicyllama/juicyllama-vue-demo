@@ -56,6 +56,9 @@ export default {
             storage.set('superhero_name', superheros[index].name)
             storage.set('superhero_avatar', superheros[index].avatar)
             online(superheros[index].name, {avatar: superheros[index].avatar})
+
+            //todo invalidate all cache items (_*)
+
             this.$router.replace('/home')
             this.$router.go(0)
         }

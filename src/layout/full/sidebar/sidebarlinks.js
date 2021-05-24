@@ -66,5 +66,13 @@ export default [
         index: 5.0,
 
     },
+    {
+        url:  '/points',
+        name: "Points",
+        i18n: "Points",
+        icon: "mdi mdi-forum",
+        index: 5.0,
+
+    },
 
 ]

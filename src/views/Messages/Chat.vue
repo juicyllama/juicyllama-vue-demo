@@ -18,11 +18,16 @@
                                         :class="{'chat-userlist-selected': chat.chat_id === chat_id}"
                                         @click="(e) => openMessages(chat, e)" >
 
-                                            <img
+                                            <vs-avatar
                                                 :src="require(`@/assets/images/superheros/${getSuperhero(otherChatter(chat)).avatar}-superhero.svg`)"
-                                                width="42"
-                                                height="42"
+                                                size="42px"
+                                                badge-color="primary"
+                                                :badge="newMessage(chat)"
+                                                style="background: none; margin: 0px -8px 10px;"
                                             >
+                                            </vs-avatar>
+
+
                                     </li>
                                 </ul>
                             </div>
@@ -39,7 +44,7 @@
 
                 <div class="right-part chat-container">
 
-                    <template  v-if="conversation">
+                    <template  v-if="conversation" >
 
 
                         <div class="chat-topbar send-message pb-1 border-bottom">
@@ -144,13 +149,13 @@
 
 <script>
 import Vue from 'vue';
+import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
 import {updateMessage, createChat, readChat, readChats, markAsRead, createMessage, deleteChat} from "@/controllers/messages"
 import {stripHTML} from "@/functions/utils/strings"
 import Pusher from "pusher-js";
 import Wiziwig from "@/views/_components/Wiziwig";
 import moment from "moment"
-import {auth, superhero} from "@/functions/auth";
 import {getSuperHero} from "@/functions/superhero";
 import superheros from "@/assets/superheros.json"
 
@@ -187,7 +192,7 @@ export default {
         newChat: async function (user_identifer_2) {
             let chat = await createChat(this.superhero.name, user_identifer_2)
             if(chat.chat_id) {
-                this.$router.push('/messages/' + Number(chat.chat_id))
+                this.$router.push('/message/' + Number(chat.chat_id))
             }
         },
         getChat: async function (chat_id) {
@@ -216,7 +221,7 @@ export default {
         },
 
         openMessages: async function(chat) {
-            this.$router.push('/messages/'+Number(chat.chat_id))
+            this.$router.push('/message/'+Number(chat.chat_id))
         },
         addMessage: async function() {
             if (this.chat_id) {
@@ -248,9 +253,9 @@ export default {
         newMessage: function(conversation) {
 
             if(conversation.users[0] === this.superhero.name && conversation.status[0] === 'UNREAD'){
-                return true
+                return 1
             }else if(conversation.users[1] === this.superhero.name && conversation.status[1] === 'UNREAD'){
-                return true
+                return 1
             }else{
                 return false
             }
@@ -353,7 +358,6 @@ export default {
             window.addEventListener('resize', this.handleWindowResize);
         })
         this.setSidebarWidth();
-
         this.runner()
     },
 
@@ -362,6 +366,9 @@ export default {
             if(to.params.chat_id){
                 this.chat_id = Number(to.params.chat_id)
                 await this.getChat(this.chat_id)
+            }else{
+              this.chat_id = false
+              this.conversation = false
             }
             this.runner()
         }
@@ -407,6 +414,10 @@ background-color: white;
     padding-left: 10px;
     padding-right: 15px;
     border-radius: 30px 0px 30px 30px;
+}
+
+.messageBody p{
+  padding: 0px 10px;
 }
 
 </style>
