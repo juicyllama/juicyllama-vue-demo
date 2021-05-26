@@ -1,0 +1,120 @@
+[
+  { "id": "t-shirt_crewneck_unisex",
+    "name": "Premium Unisex Crewneck T-shirt",
+    "type": "Apparel",
+    "points": 1999,
+    "price": 19.99,
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "selected": false
+      },
+      {
+        "name": "Heather-peach",
+        "hex": "#FFC187",
+        "selected": true
+      },
+      {
+        "name": "Black",
+        "hex": "#2D2926",
+        "selected": false
+      }
+    ],
+    "sizes": [
+      {"name": "S", "selected":  false},  {"name": "M", "selected":  false},  {"name": "L", "selected":  true}, {"name": "XL", "selected":  false}, {"name": "2XL", "selected":  false},  {"name": "3XL", "selected":  false}
+    ]
+  },
+  { "id": "t-shirt_v-neck_womens",
+    "name": "Premium Womens V-Neck T-shirt",
+    "type": "Apparel",
+    "points": 1999,
+    "price": 19.99,
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "selected": true
+      },
+      {
+        "name": "Black",
+        "hex": "#2D2926",
+        "selected": false
+      }
+    ],
+    "sizes": [
+      {"name": "S", "selected":  false},  {"name": "M", "selected":  true},  {"name": "L", "selected":  false}, {"name": "XL", "selected":  false}, {"name": "2XL", "selected":  false}
+    ]
+  },
+  { "id": "hoodie_zip_unisex_classic",
+    "name": "Classic Unisex Zip Hoodie",
+    "type": "Apparel",
+    "points": 2999,
+    "price": 29.99,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#2D2926",
+        "selected": true
+      }
+    ],
+    "sizes": [
+      {"name": "XS", "selected":  false}, {"name": "S", "selected":  false},  {"name": "M", "selected":  false},  {"name": "L", "selected":  true}, {"name": "XL", "selected":  false}, {"name": "2XL", "selected":  false}, {"name": "3XL", "selected":  false}
+    ]
+  },
+  { "id": "hoodie_pullover_unisex_prm",
+    "name": "Premium Unisex Pullover Hoodie",
+    "type": "Apparel",
+    "points": 2999,
+    "price": 29.99,
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#2D2926",
+        "selected": true
+      }
+    ],
+    "sizes": [
+      {"name": "XS", "selected":  false}, {"name": "S", "selected":  false},  {"name": "M", "selected":  false},  {"name": "L", "selected":  true}, {"name": "XL", "selected":  false}, {"name": "2XL", "selected":  false}, {"name": "3XL", "selected":  false}
+    ]
+  },
+  { "id": "msz_15oz_ceramic",
+    "name": "White 15oz Ceramic Mug",
+    "type": "Mugs",
+    "points": 999,
+    "price": 9.99,
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "selected": true
+      }
+    ]
+  },
+  { "id": "onesie_short_sleeve_baby_classic",
+    "name": "Baby Short Sleeve Onesies",
+    "type": "Apparel",
+    "points": 1499,
+    "price": 14.99,
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "selected": false
+      },
+      {
+        "name": "Pink",
+        "hex": "#F5C3CC",
+        "selected": true
+      },
+      {
+        "name": "Blue",
+        "hex": "#BCD7F2",
+        "selected": false
+      }
+    ],
+    "sizes": [
+      {"name": "6m", "selected":  false},  {"name": "12m", "selected":  true},  {"name": "18m", "selected":  false}
+    ]
+  }
+]

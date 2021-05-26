@@ -91,6 +91,6 @@ export default {
         xAgo(date){
             return xAgo(date)
         },
-    }
+    },
 }
 </script>

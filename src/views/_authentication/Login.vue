@@ -1,9 +1,9 @@
 <template>
-  <vs-row vs-justify="center" vs-align="center" class="full-height login-register-bg">
+  <vs-row vs-justify="center" vs-align="center" class="full-height">
     <vs-col type="flex" vs-justify="center" vs-align="center" class="login-register-box" vs-lg="12" vs-xs="12">
     <vs-card class=" mb-0">
       <div slot="header">
-        <h3 class="mb-1">Demo Community</h3>
+        <h3 class="mb-1"><img :src="require('@/assets/images/logo/logo-icon.svg')" height="25px" style="margin-bottom: 6px; margin-right: 6px;">Demo Community</h3>
         <p class="mb-0">Login via one of the below services:</p>
       </div>
 

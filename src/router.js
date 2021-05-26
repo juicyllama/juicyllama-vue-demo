@@ -118,6 +118,13 @@ const router = new Router({
                     index: 1,
                     component: () => import('./views/Messages/Chat.vue')
                 },
+                {
+                    path: '/points',
+                    name: 'Points',
+                    i18n: 'Points',
+                    index: 1,
+                    component: () => import('./views/Points/Points.vue')
+                },
             ]
         },
         // Redirect to 404 page, if no match found

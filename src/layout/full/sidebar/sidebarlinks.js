@@ -70,9 +70,8 @@ export default [
         url:  '/points',
         name: "Points",
         i18n: "Points",
-        icon: "mdi mdi-forum",
-        index: 5.0,
+        icon: "mdi mdi-tag-multiple",
+        index: 6.0,
 
     },
-
 ]
