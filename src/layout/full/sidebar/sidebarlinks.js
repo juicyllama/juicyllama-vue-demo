@@ -74,4 +74,33 @@ export default [
         index: 6.0,
 
     },
+    {
+        name: "Walls",
+        i18n: "Walls",
+        icon: "mdi mdi-comment-multiple-outline",
+        index: 7.0,
+        child: [
+            {
+                url:  '/forum',
+                name: "Forum",
+                i18n: "Forum",
+                icon: "mdi mdi-comment-question-outline",
+                index: 7.1
+            },
+            {
+                url:  '/social',
+                name: "Social",
+                i18n: "Social",
+                icon: "mdi mdi-comment-text-outline",
+                index: 7.2
+            },
+            {
+                url:  '/chatroom',
+                name: "Chatroom",
+                i18n: "Chatroom",
+                icon: "mdi mdi-comment-processing-outline",
+                index: 7.3
+            },
+        ]
+    },
 ]

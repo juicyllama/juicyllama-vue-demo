@@ -47,3 +47,7 @@ export async function sortArray(key, array, type = false, reverse = false) {
                 }
         })
 }
+
+export function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+}

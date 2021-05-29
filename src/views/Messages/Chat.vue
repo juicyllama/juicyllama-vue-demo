@@ -174,7 +174,6 @@ export default {
         conversation: false,
         sendMessage: " ",
         windowWidth: window.innerWidth,
-        following: false,
         search: "",
         deleted: [],
         message_limit: 99,

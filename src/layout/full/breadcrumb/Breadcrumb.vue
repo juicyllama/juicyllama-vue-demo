@@ -1,7 +1,7 @@
 <template>
   <vs-row>
     <vs-col vs-lg="6" vs-xs="12">
-      <h3 class="mt-2 mb-3">{{ $route.name }}</h3>
+      <h3 class="mt-2 mb-3" v-if="$route.name">{{ $route.name }}</h3>
     </vs-col>
     <vs-col vs-lg="6" vs-xs="12"> 
       <vs-breadcrumb v-if="$route.meta.breadcrumb"  align="right">
@@ -14,7 +14,7 @@
           <span class="text-primary cursor-default" v-else>{{ bcrumb.title }}</span>
           <span class="vs-breadcrum--separator">/</span>
         </li>
-        <li class="inline-flex">
+        <li class="inline-flex" v-if="$route.meta.breadcrumb">
           <span
             v-if="$route.meta.breadcrumb.slice(-1)[0].active"
             class="cursor-default"

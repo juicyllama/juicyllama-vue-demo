@@ -1,5 +1,5 @@
 <template>
-    <div style="display: inline-block; width: 100%">
+    <div :style="style">
         <quill-editor class="quill-editor" :style="css" :ref="type" v-model="message" :options="editorOption" v-if="editorOption" @change="onEditorChange($event)"/>
         <vs-button @click="buttonEnter" class="float-right mt-2" v-if="submit==='button'">{{ buttonLabel }}</vs-button>
     </div>
@@ -36,11 +36,19 @@ export default {
         },
         submit: {
             type: String,
-            default: "button" //options "button" "keyup"
+            default: "button" //options "button" "keyup" "sync"
         },
         theme: {
             type: String,
-            default: "boxed"
+            default: "boxed" //options "boxed" "unboxed" "unboxed-white"
+        },
+        editorTheme: {
+            type: String,
+            default: "bubble" //options "bubble" "snow"
+        },
+        style: {
+          type: String,
+          default: 'display: inline-block; width: 100%'
         }
     },
     data: () => ({
@@ -52,6 +60,9 @@ export default {
         onEditorChange({html}) {
             if(this.type){
                 localStorage[this.type] = JSON.stringify(html)
+            }
+            if(this.submit === 'sync'){
+                this.$emit('submitted', this.message)
             }
         },
         buttonEnter() {
@@ -89,6 +100,12 @@ export default {
             case 'unboxed':
                 this.css = ' border: 0px; '
                 break
+            case 'unboxed-white':
+                this.css = ' border: 0px; background: #FFFFFF; '
+                break
+            case 'unboxed-white-r10':
+                this.css = ' border: 0px; background: #FFFFFF; border-radius: 10px'
+                break
         }
 
         if(this.content){
@@ -97,7 +114,7 @@ export default {
 
         const that = this;
         this.editorOption = {
-            theme: 'bubble',
+            theme: this.editorTheme,
             placeholder: this.placeholder,
             modules: {
                 keyboard: {
@@ -139,7 +156,7 @@ export default {
 }
 
 .ql-container {
-    font-family: "Nunito Sans", sans-serif;
+    font-family: Roboto, "Nunito Sans", sans-serif;
     font-size: 12px;
     font-style: normal;
 }

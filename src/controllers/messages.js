@@ -105,27 +105,34 @@ export async function countMessages(chat_id, after = false) {
     return await Model.countMessages(chat_id, after)
 }
 
-export async function createChat(user_identifier_1, user_identifier_2, app_json = false) {
+export async function createChat(user_identifier_1, user_identifier_2, app_json = false, use_cache = true) {
     let result = await Model.addChat(user_identifier_1, user_identifier_2, app_json)
 
     if(!result) {
         return false
     }
 
-    await Cache.deleteCacheObject(`${CACHE_KEY}S`)
-    await Cache.deleteCacheObject(`${CACHE_KEY}S_COUNT`)
+    if(use_cache){
+        await Cache.deleteCacheObject(`${CACHE_KEY}S`)
+        await Cache.deleteCacheObject(`${CACHE_KEY}S_COUNT`)
+    }
+
     await readChats(user_identifier_1)
     await countChats(user_identifier_1)
     return result
 }
 
-export async function createMessage(chat_id, user_identifier, message, app_json = false) {
+export async function createMessage(chat_id, user_identifier, message, app_json = false, use_cache = true) {
     let result = await ModelMessages.addMessage(chat_id, user_identifier, message, app_json)
 
     if(!result) {
         return false
     }
-    await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+
+    if(use_cache){
+        await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+    }
+
     await readChat(chat_id, user_identifier)
     return result
 }
@@ -146,13 +153,17 @@ export async function updateChat(chat_id, user_identifier_1, user_identifier_2, 
     return result
 }
 
-export async function updateMessage(chat_id, message_id, user_identifier, message, app_json = false) {
+export async function updateMessage(chat_id, message_id, user_identifier, message, app_json = false, use_cache = true) {
     let result = await ModelMessages.addMessage(chat_id, message_id, user_identifier, message, app_json)
 
     if(!result) {
         return false
     }
-    await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+
+    if(use_cache){
+        await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+    }
+
     await readChat(chat_id, user_identifier)
     return result
 }
@@ -161,7 +172,7 @@ export async function markAsRead(chat_id, user_identifier) {
     return await Model.markReadChat(chat_id, user_identifier)
 }
 
-export async function deleteChat(chat_id, user_identifier) {
+export async function deleteChat(chat_id, user_identifier, use_cache = true) {
 
     let connection = await Model.removeChat(chat_id, user_identifier)
 
@@ -169,21 +180,28 @@ export async function deleteChat(chat_id, user_identifier) {
         return false
     }
 
-    await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
-    await Cache.deleteCacheObject(`${CACHE_KEY}S`)
-    await Cache.deleteCacheObject(`${CACHE_KEY}S_COUNT`)
+    if(use_cache){
+        await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+        await Cache.deleteCacheObject(`${CACHE_KEY}S`)
+        await Cache.deleteCacheObject(`${CACHE_KEY}S_COUNT`)
+    }
+
     await readChats(user_identifier)
     await countChats(user_identifier)
     return connection
 }
 
-export async function deleteMessage(chat_id, message_id) {
+export async function deleteMessage(chat_id, message_id, use_cache = true) {
     let result = await ModelMessages.deleteMessage(chat_id, message_id)
 
     if(!result) {
         return false
     }
-    await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+
+    if(use_cache){
+        await Cache.deleteCacheObject(`${CACHE_KEY}_${chat_id}`)
+    }
+
     await readChat(chat_id)
     return result
 }

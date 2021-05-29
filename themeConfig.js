@@ -15,11 +15,11 @@ Vue.use(Vuesax, {
 
 // CONFIGS
 const themeConfig = {
-  theme: 'dark',
-	logotitle: "JuicyLlama",
-	sidebarCollapsed: false,			// options: true (mini-sidebar), false(default)
-	topbarColor: "#F9D43C",				// options: anycolor you can use
-  themeColor:"#F9D43C"
+    theme: 'dark',
+    logotitle: "JuicyLlama",
+    sidebarCollapsed: false,			// options: true (mini-sidebar), false(default)
+    topbarColor: "#F9D43C",				// options: anycolor you can use
+    themeColor: "#F9D43C",
 }
 
 export default themeConfig

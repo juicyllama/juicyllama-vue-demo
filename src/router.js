@@ -125,6 +125,27 @@ const router = new Router({
                     index: 1,
                     component: () => import('./views/Points/Points.vue')
                 },
+                {
+                    path: '/forum',
+                    name: 'Forum',
+                    i18n: 'Forum',
+                    index: 1,
+                    component: () => import('./views/Walls/Forum.vue')
+                },
+                {
+                    path: '/topic/:topic_id',
+                    name: '',
+                    i18n: '',
+                    index: 1,
+                    component: () => import('./views/Walls/Topic.vue')
+                },
+                {
+                    path: '/social',
+                    name: 'Social',
+                    i18n: 'Social',
+                    index: 1,
+                    component: () => import('./views/Walls/Social.vue')
+                },
             ]
         },
         // Redirect to 404 page, if no match found
