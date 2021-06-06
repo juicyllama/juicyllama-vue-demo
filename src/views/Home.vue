@@ -6,19 +6,7 @@
 
     <WhosOnlineComponent></WhosOnlineComponent>
 
-    <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-xs="12">
-      <vs-card actionable class="cardx">
-        <div slot="header">
-          <h4>
-            Hello world !
-          </h4>
-        </div>
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </div>
-      </vs-card>
-
-    </vs-col>
+     <LatestTopics></LatestTopics>
 
   </vs-row>
     </section>
@@ -29,10 +17,11 @@ import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
 import WhosOnlineComponent from "@/views/_components/WhosOnline";
 import UnreadMessages from "@/views/_components/UnreadMessages";
+import LatestTopics from "@/views/_components/LatestTopics";
 
 export default {
 	name : 'Home',
-    components: {UnreadMessages, WhosOnlineComponent},
+    components: {LatestTopics, UnreadMessages, WhosOnlineComponent},
     data:() => ({
         superhero: {}
     }),
