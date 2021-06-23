@@ -55,7 +55,7 @@
 
             <vs-card>
 
-                <TopicPreview :topic="post" :superhero="superhero" @error="error"></TopicPreview>
+                <TopicPreview :topic="post" :superhero="superhero"></TopicPreview>
 
             </vs-card>
         </vs-col>
@@ -68,7 +68,8 @@
 <script>
 import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
-import {createPost, readPosts} from "@/controllers/wall"
+import {countPosts, createPost, readPosts} from "@/controllers/wall"
+import {postAward} from "@/controllers/award"
 import Pusher from "pusher-js";
 import moment from "moment";
 import Wiziwig from "@/views/_components/Wiziwig";
@@ -89,7 +90,7 @@ export default {
         message_offset: 0,
         preview: 100,
         add_topic: false,
-        posted: false,
+        posted: null,
         new_topic: {
             title: '',
             message: ''
@@ -141,8 +142,24 @@ export default {
                     title: this.new_topic.title
                 }
             )
+
             if(post.post_id) {
                 this.posted = moment()
+
+                //count user topics if first one, assign badge
+                let count = await countPosts(this.wall_id, 0, this.superhero.name, false)
+
+                switch (count){
+
+                    case Number(1):
+                        await postAward(this.superhero.name, process.env.VUE_APP_JUICYLLAMA_BADGE_FIRST_TOPIC)
+                        break
+
+                    case Number(10):
+                        await postAward(this.superhero.name, process.env.VUE_APP_JUICYLLAMA_BADGE_TOP_CONTRIBUTOR)
+                        break
+                }
+
                 this.$router.push('/topic/' + Number(post.post_id))
             }
         },

@@ -77,6 +77,29 @@ export async function readPosts(wall_id, parent_post_id = 0, limit = false, offs
     return results
 }
 
+export async function countPosts(wall_id, parent_post_id = 0, users, use_cache = false) {
+
+    let result = await ModelPost.countPosts(wall_id, parent_post_id, users)
+
+    if (!result) {
+        return false
+    }
+
+    if (use_cache) {
+
+        let cache_settings = {
+            expiry: moment().add(1, 'minutes'),
+            key: `${CACHE_KEY}_${wall_id}_${users}_COUNT`
+        }
+
+        await Cache.setCacheObject(cache_settings.key, result, cache_settings.expiry)
+
+    }
+
+    return result
+}
+
+
 export async function updatePost(wall_id, post_id, message, use_cache = true) {
     let result = await ModelPost.editPost(wall_id, post_id, message)
 

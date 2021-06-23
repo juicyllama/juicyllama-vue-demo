@@ -32,4 +32,8 @@ export default {
         return await Service.countAwards(user_identifier, badge_id)
     },
 
+    postAward: async function (user_identifier, badge_id) {
+        return await Service.postAwards(user_identifier, badge_id)
+    },
+
 }

@@ -20,6 +20,14 @@ class WallService {
         return await apiService.get( `/wall/${wall_id}/posts`, params)
     }
 
+    async countPosts(wall_id, parent_post_id = 0, users) {
+
+        let params = `&parent_post_id=${parent_post_id}`
+        params += `&users=${users}`
+
+        return await apiService.get( `/wall/${wall_id}/posts/count`, params)
+    }
+
     async addPost(wall_id, user_identifier, message, parent_post_id = false, app_json = false) {
 
         let data = {

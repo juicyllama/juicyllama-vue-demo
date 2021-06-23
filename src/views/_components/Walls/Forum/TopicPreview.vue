@@ -111,7 +111,8 @@ export default {
         },
     },
     data: () => ({
-        repliers: []
+        repliers: [],
+        preview: 150
     }),
     methods:{
         removePost: async function() {

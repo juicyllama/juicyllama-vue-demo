@@ -77,3 +77,7 @@ export async function countAwards(user_identifier, badge_id, use_cache = true) {
     return result
 
 }
+
+export async function postAward(user_identifier, badge_id) {
+    return await Model.postAward(user_identifier, badge_id)
+}

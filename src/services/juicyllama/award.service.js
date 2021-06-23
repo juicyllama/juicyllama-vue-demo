@@ -28,6 +28,11 @@ class AwardService {
         return await apiService.get('/awards/count', params)
     }
 
+    async postAwards(user_identifier, badge_id) {
+
+        return await apiService.post(`/award/${badge_id}/${user_identifier}`)
+    }
+
 }
 
 export default new AwardService()

@@ -41,6 +41,17 @@ export default {
         return results
     },
 
+    countPosts: async function(wall_id, parent_post_id = 0,  users) {
+
+        let result = await Service.countPosts(wall_id, parent_post_id, users)
+
+        if (!result) {
+            return false
+        }
+
+        return result.count
+    },
+
     editPost: async function (wall_id, post_id, message) {
 
         let result = await Service.updatePost(wall_id, post_id, message)
