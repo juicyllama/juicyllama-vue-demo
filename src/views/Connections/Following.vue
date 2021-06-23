@@ -69,7 +69,7 @@ export default {
         },
 
         getFollowing: async function () {
-            this.following = await readConnections(this.superhero.name)
+            this.following = await readConnections(this.superhero.name, 'outbound', 999, 0, false)
 
             if(this.following) {
                 for (const s in this.superheros) {

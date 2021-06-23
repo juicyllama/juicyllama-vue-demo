@@ -70,7 +70,7 @@ export default {
         },
 
         getFollowers: async function () {
-            this.followers = await readConnections(this.superhero.name, 'inbound')
+            this.followers = await readConnections(this.superhero.name, 'inbound', 999, 0, false)
 
             if(this.followers) {
                 for (const s in this.superheros) {
