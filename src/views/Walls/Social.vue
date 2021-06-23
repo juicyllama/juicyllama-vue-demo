@@ -45,6 +45,7 @@
         <div class="social" v-if="posts.length > 0">
 
         <vs-col
+            class="pr-2 pl-2"
             style="display: flex;"
             vs-justify="center"
             vs-align="center"

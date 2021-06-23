@@ -4,7 +4,7 @@
 
         <!-- /////////////////////////////////////////////
                                        Profile Image
-                  /////////////////////////////////////////////-->
+        /////////////////////////////////////////////-->
 
         <vs-row class="mt-0 p-3 w-100">
 
@@ -73,10 +73,9 @@
 
         </vs-row>
 
-
         <!-- /////////////////////////////////////////////
                                          Message
-                  /////////////////////////////////////////////-->
+         /////////////////////////////////////////////-->
 
         <vs-row>
 
@@ -90,9 +89,9 @@
 
                     </span>
 
-                    <span v-else>
+                    <span v-else class="w-100">
 
-                        <div class="comment-footer">
+                        <div class="comment-footer ">
                            <span v-html="post.message"></span>
                         </div>
 
@@ -103,10 +102,8 @@
                     Post Likes
                 /////////////////////////////////////////////-->
 
-        <vs-row>
+        <vs-row v-if="post.post_likes.length > 0">
 
-                        <div>
-                            <vs-td class="tag-item" v-if="post.post_likes.length > 0">
                     <span
                         class="popover-icon"
                         v-for="like in post.post_likes"
@@ -127,12 +124,8 @@
                         </router-link>
 
                     </span>
-                            </vs-td>
-                        </div>
 
-
-                    </vs-row>
-
+        </vs-row>
 
     </div>
 

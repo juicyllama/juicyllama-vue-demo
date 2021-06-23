@@ -3,6 +3,7 @@
     <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="12" vs-xs="12">
 
         <vs-col
+            class="pr-2 pl-2"
             style="display: flex;"
             vs-justify="center"
             vs-align="center"
