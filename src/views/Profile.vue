@@ -1,4 +1,6 @@
 <template>
+
+    <section>
  <vs-row>
 
      <vs-col
@@ -137,6 +139,23 @@
      </vs-col>
 
   </vs-row>
+
+    <vs-row>
+
+        <LatestTopics :users="[this.user]"></LatestTopics>
+
+    </vs-row>
+
+
+        <vs-row>
+
+            <LatestPosts :users="[this.user]"></LatestPosts>
+
+        </vs-row>
+
+
+    </section>
+
 </template>
 
 <script>
@@ -150,10 +169,12 @@ import {readActivity} from "@/controllers/activity";
 import {readAwards} from "@/controllers/award";
 import {readConnections} from "@/controllers/connections";
 import {readPoints} from "@/controllers/points";
+import LatestTopics from "@/views/_components/LatestTopics";
+import LatestPosts from "@/views/_components/LatestPosts";
 
 export default {
     name: 'Profile',
-    components: {},
+    components: {LatestPosts, LatestTopics},
     data: () => ({
         superhero: {},
         user: false,

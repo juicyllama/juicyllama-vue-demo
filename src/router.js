@@ -146,6 +146,13 @@ const router = new Router({
                     index: 1,
                     component: () => import('./views/Walls/Social.vue')
                 },
+                {
+                    path: '/chatroom',
+                    name: 'Chatroom',
+                    i18n: 'Chatroom',
+                    index: 1,
+                    component: () => import('./views/Walls/ChatRoom.vue')
+                },
             ]
         },
         // Redirect to 404 page, if no match found

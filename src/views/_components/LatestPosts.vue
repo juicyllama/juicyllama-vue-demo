@@ -1,31 +1,23 @@
 <template>
 
-    <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-xs="12" v-if="posts.length > 0">
-        <vs-card class="cardx">
-            <h4>
-                Latest Topics
-            </h4>
+    <vs-col type="flex" vs-justify="center" vs-align="center" vs-lg="12" vs-xs="12">
 
-            <div>
+        <vs-col
+            style="display: flex;"
+            vs-justify="center"
+            vs-align="center"
+            vs-lg="4"
+            vs-xs="12"
+            v-for="(post, p) in posts"
+            :key="p"
+        >
 
-                <vs-list>
-                    <router-link
-                        v-for="(post, index) in posts"
-                        :key="index"
-                        :to="`/topic/${post.post_id}`"
-                    >
-                    <vs-list-item
-                        icon-pack="mdi"
-                        icon="mdi-comment-question-outline"
-                        :title="post.app_json.title"
-                    ></vs-list-item>
-                    </router-link>
+            <vs-card class="card-no-padding">
+                <SinglePost :post="post" :superhero="superhero"></SinglePost>
+            </vs-card>
 
-                </vs-list>
+        </vs-col>
 
-            </div>
-
-        </vs-card>
     </vs-col>
 
 </template>
@@ -34,10 +26,11 @@ import {auth, superhero} from "@/functions/auth";
 import {online} from "@/functions/activity";
 import Pusher from "pusher-js";
 import {readPosts} from "@/controllers/wall";
+import SinglePost from "@/views/_components/Walls/Post/SinglePost";
 
 export default {
-    name: "LatestTopics",
-    components: {},
+    name: "LatestPosts",
+    components: {SinglePost},
     props: {
         users: {
             type: Array,
@@ -47,7 +40,7 @@ export default {
         superhero: {},
         superheros: [],
         posts: [],
-        wall_id: process.env.VUE_APP_JUICYLLAMA_WALL_FORUM,
+        wall_id: process.env.VUE_APP_JUICYLLAMA_WALL_SOCIAL,
     }),
     created: function () {
         auth(this.$router)
@@ -61,7 +54,7 @@ export default {
             this.$set(this, 'posts', await readPosts(
                 this.wall_id,
                 0,
-                5,
+                3,
                 0,
                 false,
                 this.users ? this.users : false,
@@ -88,10 +81,3 @@ export default {
 
 }
 </script>
-<style>
-
-.vs-list--title {
-    font-weight: unset;
-}
-
-</style>

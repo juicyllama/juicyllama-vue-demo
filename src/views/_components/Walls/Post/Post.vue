@@ -1,21 +1,20 @@
 <template>
 
-    <div class="d-md-flex align-items-center" v-if="post.post_id" style="margin: -15px 0px;">
-
+    <div class="align-items-center" v-if="post.post_id" style="margin: -15px 0;">
 
         <!-- /////////////////////////////////////////////
-                                         Profile Image
-                    /////////////////////////////////////////////-->
+                                       Profile Image
+                  /////////////////////////////////////////////-->
 
-            <div class="d-flex flex-row flex-100 comment-row mt-0 p-3">
+        <vs-row class="mt-0 p-3 w-100">
 
                 <div class="p-2">
                     <router-link :to="`/profile/${post.user_identifier}`">
 
                         <img
                             :src="require(`@/assets/images/superheros/${getSuperhero(post.user_identifier).avatar}-superhero.svg`)"
-                             width="40"
-                             class="rounded-circle"
+                            width="40"
+                            class="rounded-circle"
                         />
 
                     </router-link>
@@ -23,34 +22,33 @@
 
                 <div class="comment-text flex pl-3">
 
-                  <h6 class="font-medium feed-mt5" style="padding-bottom: 3px">
-                      <router-link :to="`/profile/${post.user_identifier}`" class="header-color">
-                          {{ post.user_identifier }}
-                      </router-link>
+                    <h6 class="font-medium feed-mt5" style="padding-bottom: 3px">
+                        <router-link :to="`/profile/${post.user_identifier}`" class="header-color">
+                            {{ post.user_identifier }}
+                        </router-link>
 
-                      <span v-if="type === 'child'"><br><span class="text-capitalize text-muted" style="font-weight: lighter; font-size: x-small"> {{xAgo(post.created_at)}}</span></span>
+                        <span v-if="type === 'child'"><br><span class="text-capitalize text-muted" style="font-weight: lighter; font-size: x-small"> {{xAgo(post.created_at)}}</span></span>
 
-                      <span v-if="post.user_identifier === superhero.name">
+                        <span v-if="post.user_identifier === superhero.name">
                           <a class="pl-2 align-middle cursor-pointer" @click="editPost()"><i class="mdi mdi-pencil primary" ></i></a>
                           <a class="align-middle cursor-pointer" @click="deletePost(post.wall_id, post.post_id)"><i class="ti-trash primary" ></i></a>
                       </span>
-                      <span v-else>
+                        <span v-else>
                            <a @click="likeComment(post.wall_id, post.post_id, post.post_likes)" class="pl-2 align-middle cursor-pointer"><i v-if="checkIn(post.post_likes)" class="mdi mdi-heart primary"></i><i v-else class="mdi mdi-heart-outline primary"></i></a>
                       </span>
-                  </h6>
+                    </h6>
 
-
-                  <div class="small">
+                    <div class="small">
 
                       <span v-if="type === 'parent'">
                           <a @click="loadPost(post.post_id)"><span class="text-capitalize primary cursor-pointer">{{xAgo(post.created_at)}}</span></a>
                       </span>
-                      <span v-else-if="type === 'popup'">
+                        <span v-else-if="type === 'popup'">
                          <span class="text-capitalize">{{xAgo(post.created_at)}}</span>
                       </span>
 
 
-                      <span v-if="type !== 'child'">
+                        <span v-if="type !== 'child'">
                           <span v-if="post.child_posts.length > 0" class="pl-2">
 
                               <span v-if="type === 'parent'">
@@ -68,12 +66,23 @@
                           <span class="pl-2" v-else>0 Comments</span>
                       </span>
 
-                      <a v-if="type === 'parent'" @click="toggleCommentBox()" class="pl-2 align-middle cursor-pointer"><i class="mdi mdi-reply primary" ></i></a>
-                  </div>
+                        <a v-if="type === 'parent'" @click="toggleCommentBox()" class="pl-2 align-middle cursor-pointer"><i class="mdi mdi-reply primary" ></i></a>
+                    </div>
 
-                    <span v-if="editbox" class="mb-3 d-block mt-2" >
+                </div>
 
-                        <div class="comment-footer" style="margin: 0px 0px -10px -67px;">
+        </vs-row>
+
+
+        <!-- /////////////////////////////////////////////
+                                         Message
+                  /////////////////////////////////////////////-->
+
+        <vs-row>
+
+                    <span v-if="editbox" class="w-100">
+
+                        <div class="comment-footer">
                             <div style="display: inline-block; width: 100%">
                                  <wiziwig placeholder="Edit Message" :content="post.message" :success="posted" :type="`POST_EDIT_${post.wall_id}_${post.post_id}`" submit="keyup" buttonLabel="EDIT" @submitted="wiziwigPost" v-if="post.wall_id && post.post_id"></wiziwig>
                             </div>
@@ -81,52 +90,49 @@
 
                     </span>
 
-                    <!-- /////////////////////////////////////////////
-                                           Message
-                    /////////////////////////////////////////////-->
+                    <span v-else>
 
-                    <span v-else class="mb-3 d-block mt-4">
-
-                        <div class="comment-footer" style="margin: 0px 0px -10px -67px;">
+                        <div class="comment-footer">
                            <span v-html="post.message"></span>
                         </div>
 
                     </span>
-
+        </vs-row>
 
                     <!-- /////////////////////////////////////////////
-                        Post Likes
-                    /////////////////////////////////////////////-->
+                    Post Likes
+                /////////////////////////////////////////////-->
+
+        <vs-row>
+
+                        <div>
+                            <vs-td class="tag-item" v-if="post.post_likes.length > 0">
+                    <span
+                        class="popover-icon"
+                        v-for="like in post.post_likes"
+                        :like="like"
+                        :key="like.like_id"
+                    >
+                        <router-link :to="`/profile/${like.user_identifier}`">
+                        <img v-if="type === 'child'"
+                            :src="require(`@/assets/images/superheros/${getSuperhero(like.user_identifier).avatar}-superhero.svg`)"
+                            width="24"
+                            height="24"
+                        >
+                            <img v-else
+                                 :src="require(`@/assets/images/superheros/${getSuperhero(like.user_identifier).avatar}-superhero.svg`)"
+                                 width="32"
+                                 height="32"
+                            >
+                        </router-link>
+
+                    </span>
+                            </vs-td>
+                        </div>
 
 
-                  <div class="comment-footer" style="margin: -10px 0px -20px -55px;">
-                      <vs-td class="tag-item" v-if="post.post_likes.length > 0">
-                          <div
-                              class="popover-icon"
-                              v-for="like in post.post_likes"
-                              :like="like"
-                              :key="like.like_id"
-                          >
+                    </vs-row>
 
-                              <router-link :to="profileURL(like.user.user_type, like.user_identifier) ">
-                                  <vs-avatar v-if="type === 'child'"
-                                      size="24px"
-                                             :src="require(`@/assets/images/superheros/${getSuperhero(like.user_identifier).avatar}-superhero.svg`)"
-                                      class="feed-like-avatar con-img vs-avatar--con-img rounded-circle vs-component vs-radius popover-item"
-                                  ></vs-avatar>
-                                  <vs-avatar v-else
-                                             size="32px"
-                                             :src="require(`@/assets/images/superheros/${getSuperhero(like.user_identifier).avatar}-superhero.svg`)"
-                                             class="feed-like-avatar con-img vs-avatar--con-img rounded-circle vs-component vs-radius popover-item"
-                                  ></vs-avatar>
-                              </router-link>
-
-                          </div>
-                      </vs-td>
-                  </div>
-              </div>
-
-            </div>
 
     </div>
 

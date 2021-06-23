@@ -31,8 +31,8 @@ export default {
         onLogin: async function(value){
             storage.set('fb', value)
             this.setTimezone()
-            this.$router.push('/home');
-            //todo push email to service to track who is using for marketing purposes.
+            this.$router.push('/superhero');
+            //todo get email from facebook and post for marketing purposes.
         },
         setTimezone: function(){
 
@@ -52,10 +52,15 @@ export default {
     computed: {},
     created: async function() {
         let fb = storage.get('fb')
+        let superhero_name = storage.get('superhero_name')
+        let superhero_avatar = storage.get('superhero_avatar')
 
-        if(fb.userID){
+        if(superhero_name && superhero_avatar){
             this.setTimezone()
             this.$router.push('/home');
+        }else if(fb.userID){
+            this.setTimezone()
+            this.$router.push('/superhero');
         }
     },
 }

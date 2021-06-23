@@ -71,14 +71,7 @@ export default [
                 i18n: "Member Chat",
                 icon: "mdi mdi-message-processing",
                 index: 5.1
-            },
-            {
-                url:  '/support',
-                name: "Support",
-                i18n: "Support",
-                icon: "mdi mdi-message",
-                index: 5.2
-            },
+            }
         ]
     },
     {

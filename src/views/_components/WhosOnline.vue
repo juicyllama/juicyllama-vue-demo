@@ -27,18 +27,6 @@
                             </router-link>
 
                     </span>
-                    <span class="popover-icon">
-                         <router-link to="/online">
-                        <vs-avatar
-                            v-if="count > show"
-                            style="font-size: large; margin: 0px -10px;"
-                            size="32px"
-                            color="primary"
-                            :text="`+${count-show}`"
-                            class="feed-like-avatar rounded-circle vs-component vs-radius popover-item"
-                        ></vs-avatar>
-                         </router-link>
-                    </span>
 
                 </vs-td>
             </div>

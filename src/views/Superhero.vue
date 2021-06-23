@@ -40,6 +40,7 @@
 import {auth} from "@/functions/auth";
 import superheros from "@/assets/superheros.json"
 import storage from "@/store/storage";
+import cache from "@/functions/cache"
 import {online} from "@/functions/activity";
 
 export default {
@@ -52,12 +53,17 @@ export default {
         auth(this.$router)
     },
     methods: {
-        setSuperhero(index) {
+        async setSuperhero(index) {
+
+            let superhero_name = storage.get('superhero_name')
+
+            if(superhero_name) {
+                await cache.clearCache()
+            }
+
             storage.set('superhero_name', superheros[index].name)
             storage.set('superhero_avatar', superheros[index].avatar)
             online(superheros[index].name, {avatar: superheros[index].avatar})
-
-            //todo invalidate all cache items (_*)
 
             this.$router.replace('/home')
             this.$router.go(0)

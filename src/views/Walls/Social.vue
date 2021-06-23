@@ -40,8 +40,6 @@
             ></wiziwig>
 
 
-
-
         </div>
 
         <div class="social" v-if="posts.length > 0">

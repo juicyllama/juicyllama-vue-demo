@@ -9,6 +9,14 @@
      <LatestTopics></LatestTopics>
 
   </vs-row>
+
+        <vs-row vs-justify="center">
+
+            <LatestPosts></LatestPosts>
+
+        </vs-row>
+
+
     </section>
 </template>
 
@@ -18,10 +26,11 @@ import {online} from "@/functions/activity";
 import WhosOnlineComponent from "@/views/_components/WhosOnline";
 import UnreadMessages from "@/views/_components/UnreadMessages";
 import LatestTopics from "@/views/_components/LatestTopics";
+import LatestPosts from "@/views/_components/LatestPosts";
 
 export default {
 	name : 'Home',
-    components: {LatestTopics, UnreadMessages, WhosOnlineComponent},
+    components: {LatestPosts, LatestTopics, UnreadMessages, WhosOnlineComponent},
     data:() => ({
         superhero: {}
     }),

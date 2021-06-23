@@ -30,6 +30,23 @@ class cacheStore {
     delCacheStore(key){
         localStorage.removeItem(`_${key}`)
     }
+
+    /**
+     * Lists all localStorage items
+     */
+
+    listCacheStore(){
+
+        let values = [],
+            keys = Object.keys(localStorage),
+            i = keys.length;
+
+        while ( i-- ) {
+            values.push( keys[i] );
+        }
+
+        return values;
+    }
 }
 
 export default new cacheStore();

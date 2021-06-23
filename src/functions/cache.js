@@ -69,4 +69,25 @@ export default {
         }
 
     },
+
+    clearCache: async function(){
+
+        try{
+            let items = await cahceStore.listCacheStore()
+            let i = items.length;
+
+            while ( i-- ) {
+                if(items[i] !== '_timezone' && items[i] !== '_fb' ){
+                        this.deleteCacheObject(items[i].substring(1))
+                }
+            }
+
+            return true
+
+        }catch (e) {
+            return false
+        }
+
+    }
+
 }

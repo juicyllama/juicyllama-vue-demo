@@ -1,5 +1,25 @@
 import moment from "moment"
 
+/**
+ * Return a filtered array based on filter key->value
+ *
+ * @param {array} array e.g. [{name="tom"},{name="jerry"}]
+ * @param {json} [includes] e.g. {name="tom"} would return all items in the array with name tom.
+ * @returns {array}
+ */
+
+export async function filterArrayObjectsIn(array, includes = {}) {
+
+        return array.filter(function (object) {
+                for (let key in includes) {
+                        if (includes.hasOwnProperty(key)) {
+                                if(object[key] === includes[key]){
+                                        return object
+                                }
+                        }
+                }
+        })
+}
 
 /**
  * Return a filtered array based on filter key->value
@@ -21,6 +41,7 @@ export async function filterArrayObjectsOut(array, excludes) {
                 }
         })
 }
+
 
 export async function sortArray(key, array, type = false, reverse = false) {
         return await array.sort(function (a, b) {
